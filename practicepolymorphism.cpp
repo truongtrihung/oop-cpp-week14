@@ -30,6 +30,15 @@ public:
         cout << "Address: " << address << endl;
     }
 
+    // --- GETTER & SETTER LỚP CHA ---
+    string getCccd() const { return cccd; }
+    string getPhone() const { return phone; }
+    string getAddress() const { return address; }
+
+    void setCccd(string c) { cccd = c; }
+    void setPhone(string p) { phone = p; }
+    void setAddress(string a) { address = a; }
+
     virtual ~Employee() = default;
 };
 
@@ -66,6 +75,17 @@ public:
         Employee::displayInfo();
         cout << "Type: Hourly Employee (" << month << "/" << year << ")" << endl;
     }
+
+    // --- GETTER & SETTER LỚP CON ---
+    int getHours() const { return hours; }
+    double getSalaryPerHour() const { return salaryPerHour; }
+    int getMonth() const { return month; }
+    int getYear() const { return year; }
+
+    void setHours(int h) { hours = h; }
+    void setSalaryPerHour(double s) { salaryPerHour = s; }
+    void setMonth(int m) { month = m; }
+    void setYear(int y) { year = y; }
 };
 
 // ==========================================
@@ -99,6 +119,15 @@ public:
         Employee::displayInfo();
         cout << "Type: Monthly Employee (" << month << "/" << year << ")" << endl;
     }
+
+    // --- GETTER & SETTER LỚP CON ---
+    double getMonthlySalary() const { return monthlySalary; }
+    int getMonth() const { return month; }
+    int getYear() const { return year; }
+
+    void setMonthlySalary(double s) { monthlySalary = s; }
+    void setMonth(int m) { month = m; }
+    void setYear(int y) { year = y; }
 };
 
 // ==========================================
@@ -135,16 +164,23 @@ public:
         Employee::displayInfo();
         cout << "Type: Daily Employee (" << month << "/" << year << ")" << endl;
     }
+
+    // --- GETTER & SETTER LỚP CON ---
+    int getNumberOfDays() const { return numberOfDays; }
+    double getSalaryPerDay() const { return salaryPerDay; }
+    int getMonth() const { return month; }
+    int getYear() const { return year; }
+
+    void setNumberOfDays(int d) { numberOfDays = d; }
+    void setSalaryPerDay(double s) { salaryPerDay = s; }
+    void setMonth(int m) { month = m; }
+    void setYear(int y) { year = y; }
 };
 
 // ==========================================
-// Hàm tính tổng lương cả năm của danh sách nhân viên
 double calculateYearlySalary(Employee* employees[], int size, int year) {
     double totalYearlySalary = 0;
-    
-    // Duyệt qua từng nhân viên trong danh sách
     for (int i = 0; i < size; ++i) {
-        // Duyệt qua cả 12 tháng trong năm đó để cộng dồn lại
         for (int month = 1; month <= 12; ++month) {
             totalYearlySalary += employees[i]->calculateSalary(month, year);
         }
@@ -168,7 +204,6 @@ int main() {
         22, 400000, 10, 2026
     );
 
-    // Con trỏ lớp cha trỏ đến đối tượng lớp con
     Employee* employees[] = {&h, &m, &d};
     int totalEmployees = sizeof(employees) / sizeof(employees[0]);
 
@@ -179,7 +214,10 @@ int main() {
         cout << "------------------------------------" << endl;
     }
      
-    // Gọi hàm tính lương theo năm cho năm 2026
+    // Ví dụ sử dụng Setter để cập nhật số điện thoại cho nhân viên h ở main
+    h.setPhone("0999.999.999");
+    cout << "-> So dien thoai moi cua NV 001: " << h.getPhone() << endl << endl;
+
     double yearlySalary = calculateYearlySalary(employees, totalEmployees, 2026);
     cout << "==> Tong quy luong cua toan bo nhan vien trong nam 2026: " << yearlySalary << " VND" << endl;
 
